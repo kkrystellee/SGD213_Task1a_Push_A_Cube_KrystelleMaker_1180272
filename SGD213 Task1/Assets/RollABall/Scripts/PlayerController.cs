@@ -3,17 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
-
-    // Create public variables for player speed, and for the Text UI game objects
-    [SerializeField]
-    public float playerAcceleration;
-	public Text numTotal;
-	public Text winText;
+public class PlayerController : MonoBehaviour 
+{
 
 	// Create private references to the player's rigidbody component and the current pick up count
 	private Rigidbody rb;
 	private int inTotalCount;
+	[SerializeField] private float playerAcceleration; 
+	[SerializeField] private Text numTotal;
+	[SerializeField] private Text winText;
 
 	// Runs once the game starts 
 	void Start ()
@@ -60,6 +58,12 @@ public class PlayerController : MonoBehaviour {
 	// Updates the pickup counter value
 	void SetCountText()
 	{
+		if (numTotal == null)
+		{
+			Debug.Log("NumTotal is null.");
+			return;
+		}
+
 		numTotal.text = "Count: " + inTotalCount.ToString ();
 		
 		// Check if player has collected enough pickups to win
